@@ -5,17 +5,19 @@
 #include <stdlib.h>
 #include <fstream>
 using namespace std;
+
 //Constructor
-listaVal::listaVal(){
+ListaValor::ListaValor(){
 	principio=NULL;
 	anterior=NULL;
 	donde=Vacio;
 	encontrado=NO;
 	cuantos_Val=0;
 }
+
 //Destructor
-listaVal::~listaVal(){
-	cajaVal *p, *aux;
+ListaValor::~ListaValor(){
+	CajaValor *p, *aux;
 	p=principio;
 	while(p!=NULL){
         aux=p;
@@ -26,17 +28,17 @@ listaVal::~listaVal(){
     anterior=NULL;
 	donde=Vacio;
 	encontrado=NO;
-	cuantos_Val=0;
+	cuantosVal=0;
 }
-void listaVal::nuevo(){
+void ListaValor::nuevo(){
     principio=NULL;
 	anterior=NULL;
 	donde=Vacio;
 	encontrado=NO;
 	cuantos_Val=0;
 }
-void listaVal::limpiar(){
-    cajaVal *p, *aux;
+void ListaValor::limpiar(){
+    CajaValor *p, *aux;
 	p=principio;
 	while(p!=NULL){
         aux=p;
@@ -47,15 +49,16 @@ void listaVal::limpiar(){
     anterior=NULL;
 	donde=Vacio;
 	encontrado=NO;
-	cuantos_Val=0;
+	cuantosVal=0;
 }
+
 //Funciones de la clase
 /*
     Esta funcion revisa la lista ordenada para determinar la ubicacion de una
     caja en la lista.
 */
-void listaVal::buscar(int a){
-	cajaVal *p;
+void ListaValor::buscar(int a){
+	CajaValor *p;
 	p=principio;
 	if(p==NULL){
 		encontrado=NO;
@@ -92,13 +95,13 @@ void listaVal::buscar(int a){
     Esta funcion agrega una caja a la lista ordenada con el valor que recibe, en
     la posicion que le corresponde.
 */
-int listaVal::agregar(int a){
-	cajaVal *p;
+int ListaValor::agregar(int a){
+	CajaValor *p;
 	buscar(a);
 	if(encontrado==SI){
 		return 0;
 	}
-	p=(cajaVal*)malloc(sizeof(cajaVal));
+	p=(CajaValor*)malloc(sizeof(CajaValor));
 	if(donde==Vacio){
 		principio=p;
 		p->siguiente=NULL;
@@ -116,15 +119,16 @@ int listaVal::agregar(int a){
 		anterior->siguiente=p;
 		p->valor=a;
 	}
-	cuantos_Val++;
+	cuantosVal++;
 	return 1;
 }
+
 /*
     Esta funcion busca el valor recibido en la lista para eliminar la caja que
     contenga ese valor.
 */
-int listaVal::borrar(int a){
-	cajaVal *p;
+int ListaValor::borrar(int a){
+	CajaValor *p;
 	buscar(a);
 	if(encontrado==NO){
 		return 0;
@@ -140,29 +144,24 @@ int listaVal::borrar(int a){
 		anterior->siguiente=NULL;
 	}
 	free(p);
-	cuantos_Val--;
+	cuantosVal--;
 	return 1;
 }
 /*
     Esta funcion saca la primera caja de la lista ordenada.
 */
-int listaVal::sacar(void){//Saca el ultimo
-	cajaVal *p, *ultimo=NULL;
+int ListaValor::sacar(void){//Saca el ultimo
+	CajaValor *p, *ultimo=NULL;
 	int valor;
 	if(principio==NULL){
 		return 999999999;
 	}
 	p=principio;
 	if(p->siguiente!=NULL){
-
         while(p->siguiente!=NULL){
-
-
             if(p->siguiente->siguiente==NULL){
-
                 ultimo=p;
             }
-
             p=p->siguiente;
         }
         if(ultimo!=NULL){
@@ -174,7 +173,7 @@ int listaVal::sacar(void){//Saca el ultimo
 	p->siguiente=NULL;
 	valor=p->valor;
 	free (p);
-	cuantos_Val--;
+	cuantosVal--;
 	return valor;
 }
 /*
@@ -182,16 +181,16 @@ int listaVal::sacar(void){//Saca el ultimo
 */
 
 //Constructor
-listaDir::listaDir(){
+ListaDireccion::ListaDireccion(){
 	principio=NULL;
 	anterior=NULL;
 	donde=Vacio;
 	encontrado=NO;
-	cuantos_Dir=0;
+	cuantosDir=0;
 }
 //Destructor
-listaDir::~listaDir(){
-	cajaDir *p, *aux;
+ListaDireccion::~ListaDireccion(){
+	CajaDireccion *p, *aux;
 	p=principio;
 	while(p!=NULL){
         aux=p;
@@ -202,17 +201,17 @@ listaDir::~listaDir(){
     anterior=NULL;
 	donde=Vacio;
 	encontrado=NO;
-	cuantos_Dir=0;
+	cuantosDir=0;
 }
-void listaDir::nuevo(){
+void ListaDireccion::nuevo(){
     principio=NULL;
 	anterior=NULL;
 	donde=Vacio;
 	encontrado=NO;
-	cuantos_Dir=0;
+	cuantosDir=0;
 }
-void listaDir::limpiar(){
-    cajaDir *p, *aux;
+void ListaDireccion::limpiar(){
+    CajaDireccion *p, *aux;
 	p=principio;
 	while(p!=NULL){
         aux=p;
@@ -223,15 +222,16 @@ void listaDir::limpiar(){
     anterior=NULL;
 	donde=Vacio;
 	encontrado=NO;
-	cuantos_Dir=0;
+	cuantosDir=0;
 }
+
 //Funciones de la clase
 /*
     Esta funcion revisa la lista ordenada para determinar la ubicacion de una
     caja en la lista.
 */
-void listaDir::buscar(Nodo *p){
-	cajaDir *q;
+void ListaDireccion::buscar(Nodo *p){
+	CajaDireccion *q;
 	q=principio;
 	if(q==NULL){
 		encontrado=NO;
@@ -239,27 +239,19 @@ void listaDir::buscar(Nodo *p){
 		return;
 	}
 	while(q){
-
 		if(q->dir==p){
-
 			encontrado=SI;
 			if(principio==q){
-
 				donde=Principio;
 			}else{
-
 				donde=EnMedio;
 			}
 			return;
-
 		}else if(p->llaves.dondePrincipio()!=NULL){
-
              if(q->dir->llaves.dondePrincipio()->valor<p->llaves.dondePrincipio()->valor){
-
                 anterior=q;
                 q=q->siguiente;
             }else{
-
                 encontrado=NO;
                 if(principio==q){
                     donde=Principio;
@@ -269,7 +261,6 @@ void listaDir::buscar(Nodo *p){
                 return;
             }
 		}else{
-
             anterior=q;
             encontrado=NO;
             if(principio==q){
@@ -279,7 +270,6 @@ void listaDir::buscar(Nodo *p){
             }else{
                 donde=Final;
             }
-
             return;
 		}
 	}
@@ -289,8 +279,8 @@ void listaDir::buscar(Nodo *p){
 	return;
 
 }
-void listaDir::buscarBorrar(Nodo *p){
-	cajaDir *q;
+void ListaDireccion::buscarBorrar(Nodo *p){
+	CajaDireccion *q;
 	q=principio;
 	if(q==NULL){
 		encontrado=NO;
@@ -308,11 +298,9 @@ void listaDir::buscarBorrar(Nodo *p){
 			}
 			return;
 		}else{
-
             anterior=q;
             q=q->siguiente;
         }
-
 	}
 	encontrado=NO;
 	donde=Final;
@@ -323,16 +311,13 @@ void listaDir::buscarBorrar(Nodo *p){
     Esta funcion agrega una caja a la lista ordenada con el valor que recibe, en
     la posicion que le corresponde.
 */
-int listaDir::agregar(Nodo *p){
-	cajaDir *q;
-
+int ListaDireccion::agregar(Nodo *p){
+	CajaDireccion *q;
 	buscar(p);
-
 	if(encontrado==SI){
 		return 0;
 	}
-
-	q=(cajaDir*)malloc(sizeof(cajaDir));
+	q=(CajaDireccion*)malloc(sizeof(CajaDireccion));
 	if(donde==Vacio){
 		principio=q;
 		q->siguiente=NULL;
@@ -350,18 +335,16 @@ int listaDir::agregar(Nodo *p){
 		anterior->siguiente=q;
 		q->dir=p;
 	}
-	cuantos_Dir++;
+	cuantosDir++;
 	return 1;
 }
 /*
     Esta funcion busca el valor recibido en la lista para eliminar la caja que
     contenga ese valor.
 */
-int listaDir::borrar(Nodo *p){
-	cajaDir *q;
-
+int ListaDireccion::borrar(Nodo *p){
+	CajaDireccion *q;
 	buscarBorrar(p);
-
 	if(encontrado==NO){
 		return 0;
 	}
@@ -372,21 +355,20 @@ int listaDir::borrar(Nodo *p){
 	    q=anterior->siguiente;
 	    anterior->siguiente=q->siguiente;
 	}else{
-
 		q=anterior->siguiente;
 		anterior->siguiente=NULL;
 	}
 	free(q);
-	cuantos_Dir--;
+	cuantosDir--;
 	return 1;
 }
+
 /*
     Esta funcion saca la primera caja de la lista ordenada.
 */
-Nodo* listaDir::sacar(void){//Saca la ultima direccion
-	cajaDir *p, *ultimo=NULL;
-
-	Nodo * dir;
+Nodo* ListaDireccion::sacar(void){//Saca la ultima direccion
+	CajaDireccion *p, *ultimo=NULL;
+	Nodo * direccion;
 	if(principio==NULL){
 		return NULL;
 	}
@@ -408,17 +390,17 @@ Nodo* listaDir::sacar(void){//Saca la ultima direccion
         ultimo->siguiente=NULL;
 	}
 	free (p);
-	cuantos_Dir--;
+	cuantosDir--;
 	return dir;
 }
 /*
     Esta funcion esta funcion imprime los valores de cada caja en la lista.
 */
-void listaVal::pintar(void){
-   cajaVal *p;
+void ListaValor::pintar(void){
+   CajaValor *p;
    p=principio;
 
-   if(cuantos_Val==0){
+   if(cuantosVal==0){
         cout<<"lista vacia.\n\n";
    }else{
        while(p!=NULL){
@@ -429,19 +411,17 @@ void listaVal::pintar(void){
    }
 }
 
-cajaVal* listaVal::dondePrincipio(){
+CajaValor* ListaValor::dondePrincipio(){
     return principio;
 }
-cajaDir* listaDir::dondePrincipio(){
+CajaDireccion* ListaDireccion::dondePrincipio(){
     return principio;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int listaDir::cuantosDir(){
-    return cuantos_Dir;
+int ListaDireccion::CuantosDir(){
+    return cuantosDir;
 }
-int listaVal::cuantosVal(){
-
-    return cuantos_Val;
-
+int ListaValor::CuantosVal(){
+    return cuantosVal;
 }
 

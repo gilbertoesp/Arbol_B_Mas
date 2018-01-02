@@ -2,34 +2,30 @@
 #define NODO_H
 
     struct Nodo;
-    enum posicion {
-      Vacio,
-      Principio,
-      EnMedio,
-      Final
-    };
+    enum posicion {Vacio,Principio,EnMedio,Final};
     enum boolean { NO = false, SI = true };
-///////////////////////////////Caja de datos////////////////////////////////////
+
     /*
-        Estructura que contiene la informacion de cada elemento de la lista.
+        Esta estructura contiene la informacion de cada elemento de la lista.
     */
-    struct cajaVal{
+    struct CajaValor{
         int valor;
-        cajaVal *siguiente;
+        CajaValor *siguiente;
     };
-    //////////////////////////////lista ordenada////////////////////////////////////
+
+
     /*
-        Clase que forma una lista ordenada con elementos caja.
+        Esta clase forma una lista ordenada con elementos caja.
     */
-    class listaVal{
-        cajaVal *principio, *anterior;
+    class ListaValor{
+        CajaValor *principio, *anterior;
         posicion donde;
         boolean encontrado;
-        int cuantos_Val;
+        int cuantosVal;
 
         public:
-            listaVal();
-            ~listaVal();
+            ListaValor();
+            ~ListaValor();
 
             void nuevo();
             void limpiar();
@@ -39,32 +35,33 @@
             int borrar(int a);
             int sacar(void);
             void pintar(void);
-            int cuantosVal();
-            cajaVal* dondePrincipio();
+            int CuantosVal();
+            CajaValor* dondePrincipio();
     };
 
 
-    ///////////////////////////////Caja de datos////////////////////////////////////
+
     /*
-        Estructura que contiene la informacion de cada elemento de la lista.
+        Esta estructura contiene la informacion de cada elemento de la lista.
     */
-    struct cajaDir{
-        Nodo *dir;
-        cajaDir *siguiente;
+    struct CajaDireccion{
+        Nodo *direccion;
+        CajaDireccion *siguiente;
     };
-    //////////////////////////////lista ordenada////////////////////////////////////
+
+
     /*
-        Clase que forma una lista ordenada con elementos caja.
+        Esta clase forma una lista ordenada con elementos caja.
     */
-    class listaDir{
-        cajaDir *principio, *anterior;
+    class ListaDireccion{
+        CajaDireccion *principio, *anterior;
         posicion donde;
         boolean encontrado;
-        int cuantos_Dir;
+        int cuantosDir;
 
         public:
-            listaDir();
-            ~listaDir();
+            ListaDireccion();
+            ~ListaDireccion();
 
             void nuevo();
             void limpiar();
@@ -74,17 +71,16 @@
             int borrar(Nodo *p);
             void buscarBorrar(Nodo *p);
             Nodo* sacar(void);
-            int cuantosDir();
-            cajaDir* dondePrincipio();
+            int CuantosDir();
+            CajaDireccion* dondePrincipio();
     };
-    ////////////////////////
+
 
     struct Nodo{
-            listaVal llaves;       //Un arreglo que contiene valores enteros.
-            listaDir direccion;  //Un arreglo de direcciones que contiene a sus posibles hijos.
+            ListaValor llaves;       //Un arreglo que contiene valores enteros.
+            ListaDireccion direccion;  //Un arreglo de direcciones que contiene a sus posibles hijos.
             bool esHoja;        //Indica si el nodo es una hoja del arbol.
             Nodo* padre;        //Indica la direccion del padre del nodo.
-
     };
 
 #endif
