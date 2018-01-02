@@ -1,0 +1,164 @@
+# depslib dependency file v1.0
+1498647505 source:c:\users\emilio\desktop\c++\arbol\arbolbmas\arbol.cpp
+	"arbol.h"
+	"Cola.h"
+	<iostream>
+	<fstream>
+
+1498630820 c:\users\emilio\desktop\c++\arbol\arbolbmas\arbol.h
+	"cola.h"
+	<iostream>
+
+1498630834 c:\users\emilio\desktop\c++\arbol\arbolbmas\cola.h
+	"Nodo.h"
+
+1498630871 c:\users\emilio\desktop\c++\arbol\arbolbmas\nodo.h
+
+1498647543 source:c:\users\emilio\desktop\c++\arbol\arbolbmas\cola.cpp
+	"Cola.h"
+	<iostream>
+
+1498647502 source:c:\users\emilio\desktop\c++\arbol\arbolbmas\main.cpp
+	"arbol.h"
+
+1498630777 source:c:\users\emilio\desktop\c++\arbol\arbolbmas\nodo.cpp
+	"Nodo.h"
+	<iostream>
+
+1498703254 source:c:\users\alumno-lcc\downloads\arbolbmas\arbolbmas\arbol.cpp
+	"arbol.h"
+	"Cola.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498630820 c:\users\alumno-lcc\downloads\arbolbmas\arbolbmas\arbol.h
+	"cola.h"
+	<iostream>
+
+1498630834 c:\users\alumno-lcc\downloads\arbolbmas\arbolbmas\cola.h
+	"Nodo.h"
+
+1498701693 c:\users\alumno-lcc\downloads\arbolbmas\arbolbmas\nodo.h
+
+1498698709 source:c:\users\alumno-lcc\downloads\arbolbmas\arbolbmas\cola.cpp
+	"Cola.h"
+	<iostream>
+	<cstdlib>
+
+1498698750 source:c:\users\alumno-lcc\downloads\arbolbmas\arbolbmas\main.cpp
+	"arbol.h"
+	<iostream>
+
+1498702794 source:c:\users\alumno-lcc\downloads\arbolbmas\arbolbmas\nodo.cpp
+	"Nodo.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498706082 source:h:\arbolbmas\arbolbmas\cola.cpp
+	"Cola.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498630836 h:\arbolbmas\arbolbmas\cola.h
+	"Nodo.h"
+
+1498706464 h:\arbolbmas\arbolbmas\nodo.h
+
+1498709976 source:h:\arbolbmas\arbolbmas\main.cpp
+	"arbol.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498630822 h:\arbolbmas\arbolbmas\arbol.h
+	"cola.h"
+	<iostream>
+
+1498708498 source:h:\arbolbmas\arbolbmas\nodo.cpp
+	"Nodo.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498710102 source:h:\arbolbmas\arbolbmas\arbol.cpp
+	"arbol.h"
+	"Cola.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498707386 source:j:\arbolbmas\arbolbmas\arbol.cpp
+	"arbol.h"
+	"Cola.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498630822 j:\arbolbmas\arbolbmas\arbol.h
+	"cola.h"
+	<iostream>
+
+1498630836 j:\arbolbmas\arbolbmas\cola.h
+	"Nodo.h"
+
+1498706464 j:\arbolbmas\arbolbmas\nodo.h
+
+1498706082 source:j:\arbolbmas\arbolbmas\cola.cpp
+	"Cola.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498706082 source:j:\arbolbmas\arbolbmas\main.cpp
+	"arbol.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1498706082 source:j:\arbolbmas\arbolbmas\nodo.cpp
+	"Nodo.h"
+	<iostream>
+	<cstdlib>
+	<fstream>
+
+1514876038 source:c:\users\xavier\desktop\arbolbmas\arbol.cpp
+	"arbol.h"
+	"Cola.h"
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<fstream>
+
+1498630822 c:\users\xavier\desktop\arbolbmas\arbol.h
+	"cola.h"
+	<iostream>
+
+1498630836 c:\users\xavier\desktop\arbolbmas\cola.h
+	"Nodo.h"
+
+1498706464 c:\users\xavier\desktop\arbolbmas\nodo.h
+
+1514876042 source:c:\users\xavier\desktop\arbolbmas\cola.cpp
+	"Cola.h"
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<fstream>
+
+1514876011 source:c:\users\xavier\desktop\arbolbmas\main.cpp
+	"arbol.h"
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<fstream>
+
+1514876046 source:c:\users\xavier\desktop\arbolbmas\nodo.cpp
+	"Nodo.h"
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<fstream>
+
