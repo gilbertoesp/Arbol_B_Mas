@@ -1,4 +1,4 @@
-#include "Nodo.h"
+#include "nodo.h"
 
 #include <iostream>
 #include <cstdlib>
