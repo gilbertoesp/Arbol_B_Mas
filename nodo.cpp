@@ -240,7 +240,7 @@ void ListaDireccion::buscar(Nodo *p){
 		return;
 	}
 	while(q){
-		if(q->dir == p){
+		if(q->direccion == p){
 			encontrado = SI;
 			if(principio == q){
 				donde = Principio;
@@ -249,7 +249,7 @@ void ListaDireccion::buscar(Nodo *p){
 			}
 			return;
 		}else if(p->llaves.dondePrincipio()!= NULL){
-             if(q->dir->llaves.dondePrincipio()->valor<p->llaves.dondePrincipio()->valor){
+             if(q->direccion->llaves.dondePrincipio()->valor<p->llaves.dondePrincipio()->valor){
                 anterior = q;
                 q = q->siguiente;
             }else{
