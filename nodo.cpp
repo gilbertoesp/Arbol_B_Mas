@@ -240,7 +240,7 @@ void ListaDireccion::buscar(Nodo *p){
 		return;
 	}
 	while(q){
-		if(q->dir == p){
+		if(q->direccion == p){
 			encontrado = SI;
 			if(principio == q){
 				donde = Principio;
@@ -249,7 +249,7 @@ void ListaDireccion::buscar(Nodo *p){
 			}
 			return;
 		}else if(p->llaves.dondePrincipio()!= NULL){
-             if(q->dir->llaves.dondePrincipio()->valor<p->llaves.dondePrincipio()->valor){
+             if(q->direccion->llaves.dondePrincipio()->valor<p->llaves.dondePrincipio()->valor){
                 anterior = q;
                 q = q->siguiente;
             }else{
@@ -289,7 +289,7 @@ void ListaDireccion::buscarBorrar(Nodo *p){
 	}
 	while(q){
 
-		if(q->dir == p){
+		if(q->direccion == p){
 			encontrado = SI;
 			if(principio == q){
 				donde = Principio;
@@ -322,19 +322,19 @@ int ListaDireccion::agregar(Nodo *p){
 	if(donde == Vacio){
 		principio = q;
 		q->siguiente = NULL;
-		q->dir = p;
+		q->direccion = p;
 	}else if(donde == Principio){
 		q->siguiente = principio;
 		principio = q;
-		q->dir = p;
+		q->direccion = p;
 	}else if(donde == EnMedio){
 		q->siguiente = anterior->siguiente;
 		anterior->siguiente = q;
-		q->dir = p;
+		q->direccion = p;
 	}else{
 		q->siguiente = NULL;
 		anterior->siguiente = q;
-		q->dir = p;
+		q->direccion = p;
 	}
 	cuantosDir++;
 	return 1;
@@ -387,7 +387,7 @@ Nodo* ListaDireccion::sacar(void){//Saca la ultima direccion
 	}else{
         principio = NULL;
 	}
-	dir = p->dir;
+	direccion = p->direccion;
 	if(ultimo!= NULL){
         ultimo->siguiente = NULL;
 	}
