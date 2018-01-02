@@ -6,13 +6,13 @@
 
 using namespace std;
 
-Cola::Cola()  {
+Cola::Cola() {
     primero = NULL;
     ultimo = NULL;
     cuantos = 0;
 }
 
-Cola::~Cola()  {
+Cola::~Cola() {
     Caja *p;
 
     while(primero) {

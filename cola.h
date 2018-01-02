@@ -9,7 +9,7 @@ struct Caja {
 
 class Cola {
     private:
-        Caja* primero, ultimo;
+        Caja *primero, *ultimo;
         int cuantos;
 
     public:
