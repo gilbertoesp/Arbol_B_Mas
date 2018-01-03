@@ -1,8 +1,8 @@
-#include "cola.h"
 #include <iostream>
 #include <cstdlib>
 #include <stdlib.h>
 #include <fstream>
+#include "cola.h"
 
 using namespace std;
 

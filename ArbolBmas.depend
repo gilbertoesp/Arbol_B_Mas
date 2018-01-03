@@ -162,3 +162,41 @@
 	<stdlib.h>
 	<fstream>
 
+1514976356 source:c:\users\xavier\documents\estructura de datos\arbol_b_mas\arbol.cpp
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<fstream>
+	"arbol.h"
+	"cola.h"
+
+1514975437 c:\users\xavier\documents\estructura de datos\arbol_b_mas\arbol.h
+	<iostream>
+	"cola.h"
+
+1514944854 c:\users\xavier\documents\estructura de datos\arbol_b_mas\cola.h
+	"nodo.h"
+
+1514975722 c:\users\xavier\documents\estructura de datos\arbol_b_mas\nodo.h
+
+1514975458 source:c:\users\xavier\documents\estructura de datos\arbol_b_mas\cola.cpp
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<fstream>
+	"cola.h"
+
+1514975320 source:c:\users\xavier\documents\estructura de datos\arbol_b_mas\main.cpp
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<fstream>
+	"arbol.h"
+
+1514975651 source:c:\users\xavier\documents\estructura de datos\arbol_b_mas\nodo.cpp
+	<iostream>
+	<cstdlib>
+	<stdlib.h>
+	<fstream>
+	"nodo.h"
+
