@@ -986,7 +986,7 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
 */
 void Arbol::lecturaLlaves(string mensaje){
     //Se abre el archivo
-    string ruta="valores/"+mensaje+".txt";
+    string ruta="casos/"+mensaje+".txt";
     char *y = (char *)ruta.c_str();
     ifstream fin(y);
     //En caso de no poder abrir el archivo se le avisa al usuario
@@ -1015,7 +1015,7 @@ void Arbol::lecturaLlaves(string mensaje){
 */
 void Arbol::borradoLlaves(string mensaje){
     //Se abre el archivo
-    string ruta="valoresBorrados/"+mensaje+".txt";
+    string ruta="casosDeBorrado/"+mensaje+".txt";
     char *y = (char *)ruta.c_str();
     ifstream fin(y);
     //En caso de no poder abrir el archivo se le avisa al usuario
