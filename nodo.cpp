@@ -101,7 +101,7 @@ int ListaValor::agregar(int a){
 	if(encontrado == SI){
 		return 0;
 	}
-	p = (CajaValor*)malloc(sizeof(CajaValor));
+	p = new CajaValor;
 	if(donde == Vacio){
 		principio = p;
 		p->siguiente = NULL;
@@ -143,7 +143,7 @@ int ListaValor::borrar(int a){
 		p = anterior->siguiente;
 		anterior->siguiente = NULL;
 	}
-	free(p);
+	delete p;
 	cuantosVal--;
 	return 1;
 }
@@ -173,7 +173,7 @@ int ListaValor::sacar(void){//Saca el ultimo
 	}
 	p->siguiente = NULL;
 	valor = p->valor;
-	free (p);
+	delete p;
 	cuantosVal--;
 	return valor;
 }
@@ -360,7 +360,7 @@ int ListaDireccion::borrar(Nodo *p){
 		q = anterior->siguiente;
 		anterior->siguiente = NULL;
 	}
-	free(q);
+	delete q;
 	cuantosDir--;
 	return 1;
 }
@@ -391,7 +391,7 @@ Nodo* ListaDireccion::sacar(void){//Saca la ultima direccion
 	if(ultimo!= NULL){
         ultimo->siguiente = NULL;
 	}
-	free (p);
+	delete p;
 	cuantosDir--;
 	return direccion;
 }
