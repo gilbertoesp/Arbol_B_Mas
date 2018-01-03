@@ -393,7 +393,7 @@ Nodo* ListaDireccion::sacar(void){//Saca la ultima direccion
 	}
 	free (p);
 	cuantosDir--;
-	return dir;
+	return direccion;
 }
 
 /*
