@@ -98,7 +98,7 @@ void Arbol::agregar(int a){
     Nodo *p;
     if(raiz==NULL){//Si el arbol no contiene elementos
 
-        p=(Nodo*)malloc(sizeof(Nodo));
+        p= new Nodo;
         p->llaves.nuevo();
         p->direccion.nuevo();
         p->esHoja = true;
@@ -143,13 +143,13 @@ void Arbol::dividirHojas(int a, Nodo *p){
     if(p==raiz){//Si la raiz es una hoja y debe dividirse por estar lleno el nodo
 
         //Crear padre y hermano derecho
-        Nodo* padre = (Nodo*)malloc(sizeof(Nodo));
+        Nodo* padre = new Nodo;
         padre->llaves.nuevo();
         padre->direccion.nuevo();
         padre->esHoja = false;
         padre->padre = NULL;
 
-        Nodo* hijo2 = (Nodo*)malloc(sizeof(Nodo));
+        Nodo* hijo2 = new Nodo;
         hijo2->llaves.nuevo();
         hijo2->direccion.nuevo();
         hijo2->esHoja = true;
@@ -186,7 +186,7 @@ void Arbol::dividirHojas(int a, Nodo *p){
     }else if((p->padre)->llaves.CuantosVal()<orden-1 && p->esHoja==true){//Si el padre del nodo le cabe otra direccion
 
         //Crear hermano derecho
-        Nodo* hijo2 = (Nodo*)malloc(sizeof(Nodo));
+        Nodo* hijo2 = new Nodo;
         hijo2->llaves.nuevo();
         hijo2->direccion.nuevo();
         hijo2->esHoja=true;
@@ -208,7 +208,7 @@ void Arbol::dividirHojas(int a, Nodo *p){
     }else{//Si el padre se llenara y debera separarse en nodos intermedios
 
         //Crea nuevo hijo
-        Nodo* hijo2 = (Nodo*)malloc(sizeof(Nodo));
+        Nodo* hijo2 = new Nodo;
         hijo2->llaves.nuevo();
         hijo2->direccion.nuevo();
         hijo2->padre=p->padre;
@@ -275,7 +275,7 @@ void Arbol::dividirPadres(Nodo *p){
     Nodo *direccion;
 
 
-    Nodo* hijo2 = (Nodo*)malloc(sizeof(Nodo));
+    Nodo* hijo2 = new Nodo;
     hijo2->llaves.nuevo();
     hijo2->direccion.nuevo();
     hijo2->esHoja=false;
@@ -312,7 +312,7 @@ void Arbol::dividirPadres(Nodo *p){
             hijo2->padre=p->padre;
         }
     }else{
-        Nodo* padre = (Nodo*)malloc(sizeof(Nodo));
+        Nodo* padre = new Nodo;
         padre->llaves.nuevo();
         padre->direccion.nuevo();
         padre->esHoja=false;
@@ -347,7 +347,7 @@ int Arbol::borrar(int a){
             p->llaves.limpiar();
             p->esHoja=false;
             p->padre=NULL;
-            free(p);
+            delete p;
             raiz=NULL;
             return 1;
         }else{//Si la raiz tiene mas de un elemento solo se borra el numero
@@ -381,7 +381,7 @@ int Arbol::borrar(int a){
     Nodo *p la direccion del nodo donde se encuentra el valor.
 */
 void Arbol::modificarHojas(int a, Nodo *p){
-    Nodo *hD, *hI, *padre, *aux;
+    Nodo *h_der, *h_izq, *padre, *aux;
     int indice, valor;
     CajaDireccion *q, *i;
     CajaValor *v;
@@ -405,43 +405,43 @@ void Arbol::modificarHojas(int a, Nodo *p){
     if(indice==0){// Si cuelga en la posicion 0 del padre
 
         //Debe tener hermano derecho
-        hD=q->siguiente->direccion;
+        h_der=q->siguiente->direccion;
 
-        if(hD->llaves.CuantosVal()>(int)orden/2){   //CASO 1           //Se revisa si el hermano derecho puede prestar un valor
+        if(h_der->llaves.CuantosVal()>(int)orden/2){   //CASO 1           //Se revisa si el hermano derecho puede prestar un valor
             //Se saca la primera llave del hermano derecho y se agrega al nodo actual
-            valor=hD->llaves.dondePrincipio()->valor;
-            hD->llaves.borrar(valor);
+            valor=h_der->llaves.dondePrincipio()->valor;
+            h_der->llaves.borrar(valor);
             p->llaves.agregar(valor);
 
             //Se cambia la llave en el padre que indica el primer elemento del hermano derecho(ya que se presto el primer valor del hermano derecho)
-            padre->llaves.dondePrincipio()->valor=hD->llaves.dondePrincipio()->valor;
+            padre->llaves.dondePrincipio()->valor=h_der->llaves.dondePrincipio()->valor;
 
         }else{      //CASO 2         //Si el hermano derecho no le puede prestar, se fucionan en el actual y se limpia el hermano derecho.
             //se saca la primera llave del padre ya que el nodo hermano derecho ya no existira
             padre->llaves.borrar(padre->llaves.dondePrincipio()->valor);
 
             //Se transfieren las llaves del hermano derecho al nodo actual, ya que al ser hoja no tiene direcciones
-            while(hD->llaves.CuantosVal()>0){
-                valor=hD->llaves.dondePrincipio()->valor;
-                hD->llaves.borrar(valor);
+            while(h_der->llaves.CuantosVal()>0){
+                valor=h_der->llaves.dondePrincipio()->valor;
+                h_der->llaves.borrar(valor);
                 p->llaves.agregar(valor);
             }
             //Se desconecta el hermano derecho del padre.
-            padre->direccion.borrar(hD);
+            padre->direccion.borrar(h_der);
 
             //Se libera memoria
-            hD->direccion.limpiar();
-            hD->llaves.limpiar();
-            hD->esHoja=false;
-            hD->padre=NULL;
-            free(hD);
+            h_der->direccion.limpiar();
+            h_der->llaves.limpiar();
+            h_der->esHoja=false;
+            h_der->padre=NULL;
+            delete h_der;
 
         }
 
     }else if(indice<orden-1){//Si el nodo cuelga entre la llaves[1] y llaves[orden-1]
 
         //Debe tener hermano izquierdo
-        hI=i->direccion;
+        h_izq=i->direccion;
 
         v=padre->llaves.dondePrincipio();
         for(int i=1; i<indice; i++){
@@ -449,14 +449,14 @@ void Arbol::modificarHojas(int a, Nodo *p){
         }
         if(q->siguiente!=NULL){   //checar si tiene hermano derecho
 
-            hD=q->siguiente->direccion;
+            h_der=q->siguiente->direccion;
 
-            if(hD->llaves.CuantosVal()>(int)orden/2||hI->llaves.CuantosVal()>(int)orden/2){//Se revisa si alguno de sus hermanos le puede prestar una llave
+            if(h_der->llaves.CuantosVal()>(int)orden/2||h_izq->llaves.CuantosVal()>(int)orden/2){//Se revisa si alguno de sus hermanos le puede prestar una llave
 
-                if(hD->llaves.CuantosVal()>(int)orden/2){       //CASO 3    //Se revisa primero el hermano derecho(si los dos le pueden prestar se usara el hermano derecho)
+                if(h_der->llaves.CuantosVal()>(int)orden/2){       //CASO 3    //Se revisa primero el hermano derecho(si los dos le pueden prestar se usara el hermano derecho)
                     //Se saca la primera llave del hermano derecho y se agrega al nodo actual
-                    valor=hD->llaves.dondePrincipio()->valor;
-                    hD->llaves.borrar(valor);
+                    valor=h_der->llaves.dondePrincipio()->valor;
+                    h_der->llaves.borrar(valor);
                     p->llaves.agregar(valor);
 
                     //Si se borro el primer elemento del nodo actual actualizar el indice en el padre
@@ -466,12 +466,12 @@ void Arbol::modificarHojas(int a, Nodo *p){
                     }
 
                     //Se cambia la llave en el padre que indica el primer elemento del hermano derecho(ya que se presto el primer valor del hermano derecho)
-                    (v->siguiente)->valor=hD->llaves.dondePrincipio()->valor;
+                    (v->siguiente)->valor=h_der->llaves.dondePrincipio()->valor;
 
                 }else{      //CASO 4     //Solo el hermano izquierdo es viable para prestarle una llave
                     //Se pide la ultima llave del hermano izquierdo para agregar al actual
-                    valor=hI->llaves.sacar();
-                    hI->llaves.borrar(valor);
+                    valor=h_izq->llaves.sacar();
+                    h_izq->llaves.borrar(valor);
                     p->llaves.agregar(valor);
 
                     //Se cambia la llave en el padre que indica el primer elemento del nodo actual(Ya que al pedir prestado al hermano izquierdo, la llave nueva sera la menor del nodo actual)
@@ -483,12 +483,12 @@ void Arbol::modificarHojas(int a, Nodo *p){
                 valor=(v->siguiente)->valor;
                 padre->llaves.borrar(valor);
                 //Se saca la direccion del hermano derecho en el padre
-                padre->direccion.borrar(hD);
+                padre->direccion.borrar(h_der);
 
                 //Se sacan las llaves del hermano derecho para agregarse al nodo actual
-                while(hD->llaves.CuantosVal()>0){
-                    valor=hD->llaves.dondePrincipio()->valor;
-                    hD->llaves.borrar(valor);
+                while(h_der->llaves.CuantosVal()>0){
+                    valor=h_der->llaves.dondePrincipio()->valor;
+                    h_der->llaves.borrar(valor);
                     p->llaves.agregar(valor);
                 }
                 //Si se borro el primer elemento del nodo actual actualizar el indice en el padre
@@ -497,19 +497,19 @@ void Arbol::modificarHojas(int a, Nodo *p){
                 }
 
                 //Liberar memoria del hermano derecho
-                hD->direccion.limpiar();
-                hD->llaves.limpiar();
-                hD->esHoja=false;
-                hD->padre=NULL;
-                free(hD);
+                h_der->direccion.limpiar();
+                h_der->llaves.limpiar();
+                h_der->esHoja=false;
+                h_der->padre=NULL;
+                delete h_der;
 
             }
         }else{//Solo tiene hermano izquierdo
 
-            if(hI->llaves.CuantosVal()>(int)orden/2){       //CASO 6           //Pedir al hermano izquierdo en caso de poder
+            if(h_izq->llaves.CuantosVal()>(int)orden/2){       //CASO 6           //Pedir al hermano izquierdo en caso de poder
                 //Se saca la ultima llave del hermano izquierdo y se agrega al actual nodo
-                valor=hI->llaves.sacar();
-                hI->llaves.borrar(valor);
+                valor=h_izq->llaves.sacar();
+                h_izq->llaves.borrar(valor);
                 p->llaves.agregar(valor);
 
                 //Se indica la nueva primera llave del nodo en el padre
@@ -526,31 +526,31 @@ void Arbol::modificarHojas(int a, Nodo *p){
                 while(p->llaves.CuantosVal()>0){
                     valor=p->llaves.dondePrincipio()->valor;
                     p->llaves.borrar(valor);
-                    hI->llaves.agregar(valor);
+                    h_izq->llaves.agregar(valor);
                 }
                 //Liberar memoria del nodo actual
                 p->direccion.limpiar();
                 p->llaves.limpiar();
                 p->esHoja=false;
                 p->padre=NULL;
-                free(p);
+                delete p;
 
             }
         }
     }else{//Es la ultima direccion del nodo (Solo tiene hermano izquierdo)
 
-        hI=i->direccion;
+        h_izq=i->direccion;
 
         v=padre->llaves.dondePrincipio();
         for(int i=1; i<indice; i++){
             v=v->siguiente;
         }
 
-        if(hI->llaves.CuantosVal()>(int)orden/2){       //CASO 8        //pedir prestado al hermano izquierdo
+        if(h_izq->llaves.CuantosVal()>(int)orden/2){       //CASO 8        //pedir prestado al hermano izquierdo
             //Se saca la ultima llave del hermano izquierdo y se agrega al actual nodo
-            valor=hI->llaves.sacar();
+            valor=h_izq->llaves.sacar();
 
-            hI->llaves.borrar(valor);
+            h_izq->llaves.borrar(valor);
             p->llaves.agregar(valor);
 
             //Se indica la nueva primera llave del nodo en el padre(ya que el hermano izquierdo le presto una llave menor que las que contenia)
@@ -568,14 +568,14 @@ void Arbol::modificarHojas(int a, Nodo *p){
             while(p->llaves.CuantosVal()>0){
                 valor=p->llaves.dondePrincipio()->valor;
                 p->llaves.borrar(valor);
-                hI->llaves.agregar(valor);
+                h_izq->llaves.agregar(valor);
             }
             //Liberar memoria del nodo actual
             p->direccion.limpiar();
             p->llaves.limpiar();
             p->esHoja=false;
             p->padre=NULL;
-            free(p);
+            delete p;
 
         }
 
@@ -609,7 +609,7 @@ void Arbol::modificarHojas(int a, Nodo *p){
         p->llaves.limpiar();
         p->esHoja=false;
         p->padre=NULL;
-        free(p);
+        delete p;
 
     }
 }
@@ -620,7 +620,7 @@ void Arbol::modificarHojas(int a, Nodo *p){
     Nodo *p la direccion del nodo que debe ajustarce en el arbol.
 */
 void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en los nodos intermedios
-    Nodo *padre, *hI, *hD, *direccion;
+    Nodo *padre, *h_izq, *h_der, *direccion;
     int valor, indice=0;
     padre=p->padre;
     CajaDireccion *q, *i;
@@ -650,18 +650,18 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
 
         //Debe tener hermano derecho ya que no puede tener una sola direccion
 
-        hD=(q->siguiente)->direccion;
+        h_der=(q->siguiente)->direccion;
 
-        if(hD->llaves.CuantosVal()>(orden-1)/2){   //CASO 1   //El hermano derecho le puede prestar una llave
+        if(h_der->llaves.CuantosVal()>(orden-1)/2){   //CASO 1   //El hermano derecho le puede prestar una llave
 
             //Se saca la primera llave del nodo derecho y se agrega al nodo padre
-            valor=hD->llaves.dondePrincipio()->valor;
-            hD->llaves.borrar(valor);
+            valor=h_der->llaves.dondePrincipio()->valor;
+            h_der->llaves.borrar(valor);
             padre->llaves.agregar(valor);
 
             //Se saca la primera direccion del hermano derecho y se agrega a las direcciones del nodo actual(quedara al final por ser una direccion del hermano derecho).
-            direccion=hD->direccion.dondePrincipio()->direccion;
-            hD->direccion.borrar(direccion);
+            direccion=h_der->direccion.dondePrincipio()->direccion;
+            h_der->direccion.borrar(direccion);
             p->direccion.agregar(direccion);
 
             //Asignar nuevo padre al nodo que se movio
@@ -669,18 +669,18 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
 
         }else{  //CASO 2  //El hermano derecho no le puede prestar
             //Se sacan las llaves del hermano derecho para agregarse al nodo actual
-            while(hD->llaves.CuantosVal()>0){
-                //valor=hD->llaves.dondePrincipio()->valor;
-                //hD->llaves.borrar(valor);
-                valor=hD->llaves.sacar();
+            while(h_der->llaves.CuantosVal()>0){
+                //valor=h_der->llaves.dondePrincipio()->valor;
+                //h_der->llaves.borrar(valor);
+                valor=h_der->llaves.sacar();
 
                 p->llaves.agregar(valor);
 
             }
             //Se sacan las direcciones del hermano derecho para agregarse al nodo actual
-            while(hD->direccion.CuantosDir()>0){
+            while(h_der->direccion.CuantosDir()>0){
 
-                direccion=hD->direccion.sacar();
+                direccion=h_der->direccion.sacar();
 
                 p->direccion.agregar(direccion);
 
@@ -690,15 +690,15 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
 
             }
             //Se saca la direccion del hermano derecho en el padre
-            padre->direccion.borrar(hD);
+            padre->direccion.borrar(h_der);
 
 
             //Liberar memoria del hermano derecho
-            hD->direccion.limpiar();
-            hD->llaves.limpiar();
-            hD->esHoja=false;
-            hD->padre=NULL;
-            free(hD);
+            h_der->direccion.limpiar();
+            h_der->llaves.limpiar();
+            h_der->esHoja=false;
+            h_der->padre=NULL;
+            delete h_der;
 
         }
 
@@ -718,15 +718,15 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
     }else if(indice<orden-1){//Si el nodo cuelga entre la direccion[1] y direccion[orden-1]
 
         //Debe tener un hermano izquierdo
-        hI=i->direccion;
+        h_izq=i->direccion;
 
         if(q->siguiente!=NULL){//Checar si tiene hermano derecho
 
-            hD=q->siguiente->direccion;
+            h_der=q->siguiente->direccion;
 
-            if(hD->llaves.CuantosVal()>(orden-1)/2||hI->llaves.CuantosVal()>(orden-1)/2){//Se revisa si el hermano derecho o izquierdo pueden prestar llaves sin incumplir las reglas del arbol
+            if(h_der->llaves.CuantosVal()>(orden-1)/2||h_izq->llaves.CuantosVal()>(orden-1)/2){//Se revisa si el hermano derecho o izquierdo pueden prestar llaves sin incumplir las reglas del arbol
 
-                if(hD->llaves.CuantosVal()>(orden-1)/2){           //CASO 3        //Se revisa primero el hermano derecho para prestar
+                if(h_der->llaves.CuantosVal()>(orden-1)/2){           //CASO 3        //Se revisa primero el hermano derecho para prestar
                     padre->llaves.agregar(valor);
 
                     p->llaves.borrar(valor);
@@ -743,15 +743,15 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
 
 
                     //Se saca la primera llave del hermano derecho y se agrega al nodo padre
-                    valor=hD->llaves.dondePrincipio()->valor;
-                    hD->llaves.borrar(valor);
+                    valor=h_der->llaves.dondePrincipio()->valor;
+                    h_der->llaves.borrar(valor);
 
                     padre->llaves.agregar(valor);
 
 
                     //Se saca la primera direccion del hermano derecho y se agrega a las direcciones del nodo actual(quedara al final por ser una direccion del hermano derecho).
-                    direccion=hD->direccion.dondePrincipio()->direccion;
-                    hD->direccion.borrar(direccion);
+                    direccion=h_der->direccion.dondePrincipio()->direccion;
+                    h_der->direccion.borrar(direccion);
                     p->direccion.agregar(direccion);
 
                     //Asignar nuevo padre al nodo que se movio
@@ -773,13 +773,13 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
 
                 }else{    //CASO 4    //Solo el hermano izquierdo es viable para prestarle una llave
                     //Se saca la ultima llave del hermano izquierdo y se agrega al nodo padre
-                    valor=hI->llaves.sacar();
-                    hI->llaves.borrar(valor);
+                    valor=h_izq->llaves.sacar();
+                    h_izq->llaves.borrar(valor);
                     padre->llaves.agregar(valor);
 
                     //Se saca la primera direccion del hermano izquierdo y se agrega a las direcciones del nodo actual(quedara al principio por ser una direccion del hermano izquierdo).
-                    direccion=hI->direccion.sacar();
-                    hI->direccion.borrar(direccion);
+                    direccion=h_izq->direccion.sacar();
+                    h_izq->direccion.borrar(direccion);
                     p->direccion.agregar(direccion);
 
                     //Asignar nuevo padre al nodo que se movio
@@ -798,19 +798,19 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
                 while(p->llaves.CuantosVal()>0){
                     valor=p->llaves.dondePrincipio()->valor;
                     p->llaves.borrar(valor);
-                    hI->llaves.agregar(valor);
+                    h_izq->llaves.agregar(valor);
                 }
 
                 //Se sacan las direcciones del nodo actual para agregarse al hermano izquierdo
                 while(p->direccion.CuantosDir()>0){
                     direccion=p->direccion.dondePrincipio()->direccion;
 
-                    hI->direccion.agregar(direccion);
+                    h_izq->direccion.agregar(direccion);
 
                     p->direccion.borrar(direccion);
 
                     //Se asignan sus nuevos padres a los nodos
-                    direccion->padre=hI;
+                    direccion->padre=h_izq;
 
                 }
 
@@ -821,16 +821,16 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
                 p->llaves.limpiar();
                 p->esHoja=false;
                 p->padre=NULL;
-                free(p);
+                delete p;
 
                 //Si es el padre de una hoja se actualiza al primer valor de su nuevo
-                if(hI->direccion.dondePrincipio()->direccion->esHoja==true){
-                    v=hI->llaves.dondePrincipio();
+                if(h_izq->direccion.dondePrincipio()->direccion->esHoja==true){
+                    v=h_izq->llaves.dondePrincipio();
                     for(int j=0; j<((orden-1)/2); j++){
                         v=v->siguiente;
                     }
 
-                    i=hI->direccion.dondePrincipio();
+                    i=h_izq->direccion.dondePrincipio();
                     for(int j=0; j<((orden+1)/2); j++){
                         i=i->siguiente;
                     }
@@ -841,15 +841,15 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
             }
 
         }else{//Solo tiene hermano izquierdo
-            if(hI->llaves.CuantosVal()>(orden-1)/2){    //CASO 6    //Pedir al hermano izquierdo en caso de poder
+            if(h_izq->llaves.CuantosVal()>(orden-1)/2){    //CASO 6    //Pedir al hermano izquierdo en caso de poder
                 //Se saca la ultima llave del hermano izquierdo y se agrega al nodo padre
-                valor=hI->llaves.sacar();
-                hI->llaves.borrar(valor);
+                valor=h_izq->llaves.sacar();
+                h_izq->llaves.borrar(valor);
                 padre->llaves.agregar(valor);
 
                 //Se saca la primera direccion del hermano izquierdo y se agrega a las direcciones del nodo actual(quedara al principio por ser una direccion del hermano izquierdo).
-                direccion=hI->direccion.sacar();
-                hI->direccion.borrar(direccion);
+                direccion=h_izq->direccion.sacar();
+                h_izq->direccion.borrar(direccion);
                 p->direccion.agregar(direccion);
 
                 //Asignar nuevo padre al nodo que se movio
@@ -867,19 +867,19 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
                 while(p->llaves.CuantosVal()>0){
                     valor=p->llaves.dondePrincipio()->valor;
                     p->llaves.borrar(valor);
-                    hI->llaves.agregar(valor);
+                    h_izq->llaves.agregar(valor);
                 }
 
                 //Se sacan las direcciones del nodo actual para agregarse al hermano izquierdo
                 while(p->direccion.CuantosDir()>0){
                     direccion=p->direccion.dondePrincipio()->direccion;
 
-                    hI->direccion.agregar(direccion);
+                    h_izq->direccion.agregar(direccion);
 
                     p->direccion.borrar(direccion);
 
                     //Se asignan sus nuevos padres a los nodos
-                    direccion->padre=hI;
+                    direccion->padre=h_izq;
 
                 }
 
@@ -891,16 +891,16 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
                 p->llaves.limpiar();
                 p->esHoja=false;
                 p->padre=NULL;
-                free(p);
+                delete p;
 
                 //Si es el padre de una hoja se actualiza al primer valor de su nuevo
-                if(hI->direccion.dondePrincipio()->direccion->esHoja==true){
-                    v=hI->llaves.dondePrincipio();
+                if(h_izq->direccion.dondePrincipio()->direccion->esHoja==true){
+                    v=h_izq->llaves.dondePrincipio();
                     for(int j=0; j<((orden-1)/2); j++){
                         v=v->siguiente;
                     }
 
-                    i=hI->direccion.dondePrincipio();
+                    i=h_izq->direccion.dondePrincipio();
                     for(int j=0; j<((orden+1)/2); j++){
                         i=i->siguiente;
                     }
@@ -914,17 +914,17 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
         }
     }else{//Solo tiene hermano izquierdo
 
-        hI=i->direccion;
+        h_izq=i->direccion;
 
-        if(hI->llaves.CuantosVal()>(orden-1)/2){    //Caso 8    //El hermano izquierdo le puede prestar una llave y una direccion
+        if(h_izq->llaves.CuantosVal()>(orden-1)/2){    //Caso 8    //El hermano izquierdo le puede prestar una llave y una direccion
             //Se saca la ultima llave del hermano izquierdo y se agrega al nodo padre
-            valor=hI->llaves.sacar();
-            hI->llaves.borrar(valor);
+            valor=h_izq->llaves.sacar();
+            h_izq->llaves.borrar(valor);
             padre->llaves.agregar(valor);
 
             //Se saca la primera direccion del hermano izquierdo y se agrega a las direcciones del nodo actual(quedara al principio por ser una direccion del hermano izquierdo).
-            direccion=hI->direccion.sacar();
-            hI->direccion.borrar(direccion);
+            direccion=h_izq->direccion.sacar();
+            h_izq->direccion.borrar(direccion);
             p->direccion.agregar(direccion);
 
             //Asignar nuevo padre al nodo que se movio
@@ -943,15 +943,15 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
             while(p->llaves.CuantosVal()>0){
                 valor=p->llaves.sacar();
 
-                hI->llaves.agregar(valor);
+                h_izq->llaves.agregar(valor);
             }
 
             //Se sacan las direcciones del nodo actual para agregarse al hermano izquierdo
             while(p->direccion.CuantosDir()>0){
                 direccion=p->direccion.sacar();
-                hI->direccion.agregar(direccion);
+                h_izq->direccion.agregar(direccion);
                 //Se asignan sus nuevos padres a los nodos
-                direccion->padre=hI;
+                direccion->padre=h_izq;
             }
 
             //Se saca la direccion del nodo actual en el padre
@@ -961,15 +961,15 @@ void Arbol::modificarPadres(Nodo *p){//Estos casos permiten ajustar el arbol en 
             p->llaves.limpiar();
             p->esHoja=false;
             p->padre=NULL;
-            free(p);
+            delete p;
 
             //Si es el padre de una hoja se actualiza al primer valor de su nuevo
-            if(hI->direccion.dondePrincipio()->direccion->esHoja==true){
-                v=hI->llaves.dondePrincipio();
+            if(h_izq->direccion.dondePrincipio()->direccion->esHoja==true){
+                v=h_izq->llaves.dondePrincipio();
                 for(int j=0; j<((orden-1)/2); j++){
                     v=v->siguiente;
                 }
-                i=hI->direccion.dondePrincipio();
+                i=h_izq->direccion.dondePrincipio();
                 for(int j=0; j<((orden+1)/2); j++){
                     i=i->siguiente;
                 }
@@ -1044,8 +1044,8 @@ void Arbol::borradoLlaves(string mensaje){
 */
 void Arbol::pintar(){
     cout<<"\n\n=========== Arbol =============\n\n";
-    Cola *Q=(Cola*)malloc(sizeof(Cola));
-    Cola *H=(Cola*)malloc(sizeof(Cola));
+    Cola *Q= new Cola;
+    Cola *H= new Cola;
     Q->nuevo();
     H->nuevo();
 	Nodo *siguiente;
