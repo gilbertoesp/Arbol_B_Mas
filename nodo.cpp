@@ -22,7 +22,7 @@ ListaValor::~ListaValor(){
 	while(p!= NULL){
         aux = p;
         p = p->siguiente;
-        free(aux);
+        delete aux;
     }
     principio = NULL;
     anterior = NULL;
@@ -43,7 +43,7 @@ void ListaValor::limpiar(){
 	while(p!= NULL){
         aux = p;
         p = p->siguiente;
-        free(aux);
+        delete aux;
     }
     principio = NULL;
     anterior = NULL;
@@ -194,7 +194,7 @@ ListaDireccion::~ListaDireccion(){
 	while(p!= NULL){
         aux = p;
         p = p->siguiente;
-        free(aux);
+        delete aux;
     }
     principio = NULL;
     anterior = NULL;
@@ -217,7 +217,7 @@ void ListaDireccion::limpiar(){
 	while(p!= NULL){
         aux = p;
         p = p->siguiente;
-        free(aux);
+        delete aux;
     }
     principio = NULL;
     anterior = NULL;
@@ -318,7 +318,7 @@ int ListaDireccion::agregar(Nodo *p){
 	if(encontrado == SI){
 		return 0;
 	}
-	q = (CajaDireccion*)malloc(sizeof(CajaDireccion));
+	q = new CajaDireccion;
 	if(donde == Vacio){
 		principio = q;
 		q->siguiente = NULL;
