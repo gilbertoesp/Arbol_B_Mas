@@ -22,7 +22,7 @@ ListaValor::~ListaValor(){
 	while(p!= NULL){
         aux = p;
         p = p->siguiente;
-        free(aux);
+        delete aux;
     }
     principio = NULL;
     anterior = NULL;
@@ -43,7 +43,7 @@ void ListaValor::limpiar(){
 	while(p!= NULL){
         aux = p;
         p = p->siguiente;
-        free(aux);
+        delete aux;
     }
     principio = NULL;
     anterior = NULL;
