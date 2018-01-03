@@ -38,7 +38,7 @@
             //Este metodo permite leer un archivo con los valores que se borraran del arbol.
             void borradoLlaves(string mensaje);
 
-            //Este metodo permite pintar los nodos del arvol con todos los valores que contenga.
+            //Este metodo permite pintar los nodos del arbol con todos los valores que contenga.
             void pintar();
 
     };
