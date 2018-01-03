@@ -264,7 +264,7 @@ void Arbol::dividirHojas(int a, Nodo *p){
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
-    Permite dividir los nodos intermedios del arbol y reajustar el arbol.
+    Permite dividir los nodos intermedios y reajustar el arbol.
 
     Nodo *p: la direccion del nodo que se debera ajustar en el arbol.
 */
@@ -332,6 +332,7 @@ void Arbol::dividirPadres(Nodo *p){
 
     int a:valor que se desea borrar.
 */
+
 int Arbol::borrar(int a){
     Nodo *p;
     buscar(a);
@@ -1001,7 +1002,7 @@ void Arbol::lecturaLlaves(string mensaje){
 	//Se agrega la informacion a la grafica
         fin>>a;
         agregar(a);
-        cout<<"\n -> Numero agregado:"<<a<<"\n";
+        cout<<"\n -> Numero agregado: "<<a<<"\n";
     }
     cout<<"\n\n\n";
     cout<<"Archivo leido ....\n";
@@ -1030,7 +1031,7 @@ void Arbol::borradoLlaves(string mensaje){
 	//Se agrega la informacion a la grafica
         fin>>a;
         borrar(a);
-        cout<<"\n -> Numero borrado:" <<a<<"\n";
+        cout<<"\n -> Numero borrado: " <<a<<"\n";
     }
     cout<<"\n\n\n";
     cout<<"Archivo leido ....\n";

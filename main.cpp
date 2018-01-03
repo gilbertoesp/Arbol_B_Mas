@@ -10,34 +10,36 @@ int main(){
     string mensaje="mensaje";
     int orden=3;
 
-    cout<<"\nPrograma que almacena numeros en una estructura arbol b+.\n\n";
+    cout<<"\nPrograma que almacena numeros en una estructura arbol B+ de orden 3.\n\n";
 
-    cout<<"De que orden quiere generar el arbol:";
-    cin>>orden;
+    cout << "\nSe cargan los datos que agregar al arbol desde un archivo de texto guardado en la carpeta 'valores', este no debe incluir .txt, la ruta ya esta definida.\n \
+        Para eliminar datos, de igual manera se cargan en desde la carpeta 'valoresBorrados', y se eliminan los valores que contenga este archivo\n" <<endl;
 
     Arbol A(orden);
 
-    cout<<"\n\nIngrese el nombre del archivo con valores para\nagregar al arbol, en la carpeta valores:";
+    cout<<"\n\nIngrese el nombre del archivo con valores para\nagregar al arbol, en la carpeta valores:  ";
     cin>>mensaje;
 
     A.lecturaLlaves(mensaje);
 
-    cout<<"\n//////////////////////////Arbol generado por archivo///////////////////////////\n";
+    cout<<"\nArbol generado por archivo\n";
     A.pintar();
 
-    cout<<"\n\nDeseas borrar valores del arbol desde un archivo?\n[1]Si\n[Otra tecla]NO\n\nOpcion:";
+    cout<<"\n\nDeseas borrar valores del arbol desde un archivo?\n [1]Si\n [Otra tecla]NO\n \nOpcion:  ";
+
     cin>>mensaje;
     if(mensaje=="1"){
-        cout<<"\n\nIngrese el nombre del archivo con valores para\nborrar del arbol, en la carpeta valoresBorrados:";
+        cout<<"\n\nIngrese el nombre del archivo con valores para\nborrar del arbol, en la carpeta valoresBorrados:  ";
         cin>>mensaje;
 
         A.borradoLlaves(mensaje);
-        cout<<"\n//////////////////////////Arbol con valores borrados//////////////////////////\n";
+        cout<<"\nArbol con valores borrados\n";
         A.pintar();
     }
 
-    cout<<"\n\nGracias por usar este programa\n\n";
+    cout<<"\nEspinoza Maciel Gilberto \n Paredes Padilla Jorge Xavier \n Figueroa Miranda Jose Jesus \n\n";
 
+    system("pause");
     return 0;
 }
 

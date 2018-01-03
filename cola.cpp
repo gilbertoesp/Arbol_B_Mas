@@ -1,4 +1,4 @@
-#include "Cola.h"
+#include "cola.h"
 #include <iostream>
 #include <cstdlib>
 #include <stdlib.h>
